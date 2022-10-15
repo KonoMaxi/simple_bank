@@ -11,17 +11,20 @@ alice = User.create(email: "alice@konow.ski", password: "h3lloAlice")
 bob = User.create(email: "bob@konow.ski", password: "h3lloBobby")
 
 AccountingTransaction.create(
-  debit_account: maximilian,
-  credit_account: alice,
-  amount: 99.99
+  debit_account_id: maximilian.id,
+  credit_account_id: alice.id,
+  amount: 99.99,
+  date: DateTime.now
 )
 AccountingTransaction.create(
-  debit_account: alice,
-  credit_account: bob,
-  amount: 10
+  debit_account_id: alice.id,
+  credit_account_id: bob.id,
+  amount: 10,
+  date: DateTime.now
 )
 AccountingTransaction.create(
-  debit_account: maximilian,
-  credit_account: bob,
-  amount: 1.01
+  debit_account_id: bob.id,
+  credit_account_id: maximilian.id,
+  amount: 1.01,
+  date: DateTime.now
 )
