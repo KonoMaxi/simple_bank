@@ -27,4 +27,14 @@ class AccountingTransactionTest < ActiveSupport::TestCase
     ).valid?
   end
 
+  test "new accounting_transaction creates two new account_balances" do
+    assert_difference("AccountBalance.count", 2) do
+      AccountingTransaction.create(
+        amount: 10,
+        date: DateTime.now,
+        debit_account: users(:max),
+        credit_account: users(:eline)
+      )
+    end
+  end
 end

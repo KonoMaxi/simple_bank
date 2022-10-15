@@ -36,4 +36,29 @@ class AccountBalanceTest < ActiveSupport::TestCase
       accounting_transaction: @accounting_transaction
     ).valid?
   end
+
+  test "balances are updated correctly" do
+    transferred_amount = 10
+    eline_balance = users(:eline).current_balance.total
+    max_balance = users(:max).current_balance.total
+
+    assert_changes(
+      ->{ users(:eline).current_balance.total },
+      from: eline_balance,
+      to: eline_balance + transferred_amount
+    ) do
+      assert_changes(
+        ->{ users(:max).current_balance.total },
+        from: max_balance,
+        to: max_balance - transferred_amount
+      ) do
+        AccountingTransaction.create!(
+          amount: transferred_amount,
+          debit_account_id: users(:eline).id,
+          credit_account_id: users(:max).id,
+          date: DateTime.now
+        )
+      end
+    end
+  end
 end

@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :account_balances
 
   def current_balance
-    account_balances.order(:created_at, :desc).first
+    account_balances.order(created_at: :desc).first
   end
+
 end
