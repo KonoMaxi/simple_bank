@@ -26,4 +26,5 @@ class AccountingTransactionTest < ActiveSupport::TestCase
       credit_account: users(:eline)
     ).valid?
   end
+
 end

@@ -1,0 +1,37 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+eline_one:
+  user: eline
+  accounting_transaction: one
+  total: 10000.01
+  change: 10000.01
+
+eline_two:
+  user: eline
+  accounting_transaction: two
+  total: 10013.38
+  change: 13.37
+
+some_rich_dude_one:
+  user: some_rich_dude
+  accounting_transaction: one
+  total: -10000.01
+  change: -10000.01
+
+some_rich_dude_three:
+  user: some_rich_dude
+  accounting_transaction: three
+  total: -20000
+  change: -9999.99
+
+max_two:
+  user: max
+  accounting_transaction: two
+  total: -13.37
+  change: -13.37
+
+max_three:
+  user: max
+  accounting_transaction: three
+  total: 9986.62
+  change: 9999.99
