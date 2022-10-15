@@ -3,4 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  has_many :debit_accounting_transactions, class_name: "AccountingTransaction", foreign_key: "debit_account_id"
+  has_many :credit_accounting_transactions, class_name: "AccountingTransaction", foreign_key: "credit_account_id"
 end
