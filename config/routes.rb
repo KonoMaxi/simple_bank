@@ -1,9 +1,13 @@
+# Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
 
-  # Defines the root path route ("/")
+  post "/graphql", to: "graphql#execute"
 
   root 'home#index'
+
   get '*path', to: 'home#index', via: :all
 end

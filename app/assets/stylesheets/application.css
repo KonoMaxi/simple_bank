@@ -18,11 +18,18 @@
 body {
   position: relative;
 }
+
+#content {
+  height: 100vh;
+  width: 100vw;
+}
 #flash_notification_area {
   position: absolute;
   top: 15px;
   left: 0;
   right: 0;
+  padding-right: 25px;
+  padding-left: 25px;
   margin-right: auto;
   margin-left: auto;
   text-align: center;
