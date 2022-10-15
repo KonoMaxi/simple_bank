@@ -12,13 +12,16 @@ import App from "./app"
 const queryClient = new QueryClient()
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.createRoot(
-    document.getElementById("root")
-  ).render(
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
-    </QueryClientProvider>
-  )
+  const reactRoot = document.getElementById("root")
+  if (reactRoot) {
+    ReactDOM.createRoot(
+      reactRoot
+    ).render(
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <App/>
+        </BrowserRouter>
+      </QueryClientProvider>
+    )
+  }
 })

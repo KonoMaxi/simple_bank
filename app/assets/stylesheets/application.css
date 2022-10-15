@@ -14,3 +14,24 @@
  *= require_tree .
  *= require react
  */
+
+body {
+  position: relative;
+}
+#flash_notification_area {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  transition: top 2s ease
+}
+
+.notice {
+  background-color: lightblue;
+}
+.alert {
+  background-color:  red;
+}
