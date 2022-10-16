@@ -5,6 +5,7 @@ class AccountingTransaction < ApplicationRecord
 
   validates :date, presence: true
   validates :amount, presence: true
+  validates :debit_account, comparison: { other_than: :credit_account }
 
   after_create :update_account_balances
 

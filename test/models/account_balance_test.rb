@@ -22,19 +22,23 @@ class AccountBalanceTest < ActiveSupport::TestCase
   end
 
   test "validates change present" do
-    assert_not AccountBalance.new(
+    ab = AccountBalance.new(
       total: 19.99,
       user: @user,
       accounting_transaction: @accounting_transaction
-    ).valid?
+    )
+    assert ab.invalid?, "expecting account_balance to be invalid"
+    assert ab.errors.key?(:change), "expecting account_balance to be invalid"
   end
 
   test "validates total present" do
-    assert_not AccountBalance.new(
+    ab = AccountBalance.new(
       change: 10,
       user: @user,
       accounting_transaction: @accounting_transaction
-    ).valid?
+    )
+    assert ab.invalid?, "expecting account_balance to be invalid"
+    assert ab.errors.key?(:total), "expecting account_balance to be invalid"
   end
 
   test "balances are updated correctly" do

@@ -12,4 +12,24 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 0, users(:eline).credit_accounting_transactions.count
     assert_equal 2, users(:some_rich_dude).credit_accounting_transactions.count
   end
+
+  test "validates email unique" do
+    user =  User.new(
+      email: users(:max).email,
+      password: "hello_you!",
+      password_confirmation: "hello_you!"
+    )
+    assert user.invalid?, "expecting user to be invalid"
+    assert user.errors.key?(:email), "expecting email validation error"
+  end
+
+  test "validates email format" do
+    user =  User.new(
+      email: "not_an_email",
+      password: "hello_you!",
+      password_confirmation: "hello_you!"
+    )
+    assert user.invalid?, "expecting user to be invalid"
+    assert user.errors.key?(:email), "expecting email validation error"
+  end
 end
