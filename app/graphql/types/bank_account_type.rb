@@ -6,7 +6,8 @@ module Types
     field :email, String, null: false
     field :current_balance, Float, null: true
     field :last_transaction_at, GraphQL::Types::ISO8601DateTime, null: true
-    field :transactions, [Types::BankAccountTransactionType], null: true,
+    field :transactions, Types::BankAccountTransactionType.connection_type,
+      null: true, default_page_size: 10,
       description: "The list of all transactions"
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
