@@ -10,8 +10,22 @@ module Types
     field :bank_account, Types::BankAccountType, null: false,
       description: "A users Bank account info"
 
+    field :transaction_recipients, [Types::UserType], null: false,
+      description: "Available users to send money to" do
+        argument :search_term, String, validates: { length: { minimum: 3 } }
+        argument :limit, Integer, default_value: 10,
+          validates: { numericality: { less_than_or_equal_to: 25 } }
+
+    end
+
     def bank_account
       context[:current_user]
+    end
+
+    def transaction_recipients(search_term:, limit:)
+      User.
+        order(:email).excluding(context[:current_user]).
+        search_by_email(search_term).limit(limit)
     end
   end
 end
