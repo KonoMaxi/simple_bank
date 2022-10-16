@@ -10,6 +10,13 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
 
+  # I could install some search plugin like ransack or meilisearch, but that just seems overkill
+  scope :search_by_email, -> (search_term) {
+    where(User.arel_table[:email].matches(
+      Arel::Nodes::BindParam.new("%#{search_term}%")
+    ))
+  }
+
   def current_balance
     account_balances.order(created_at: :desc).first
   end
