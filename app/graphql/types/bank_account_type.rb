@@ -13,7 +13,7 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     def transactions
-      object.account_balances.order(created_at: :desc).includes(:accounting_transaction)
+      object.account_balances.order(created_at: :desc).includes(accounting_transaction: [ :debit_account, :credit_account ])
     end
 
     def last_transaction_at

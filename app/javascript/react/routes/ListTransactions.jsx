@@ -39,6 +39,7 @@ export default function ListTransactions() {
           {page.nodes.map((transaction) => (
             <div className={ transaction.direction == "IN" ? 'card green' : 'card red'} key={transaction.accountingTransactionId}>
               <p>Date: {transaction.date}</p>
+              <p>{(transaction.direction == "IN" ? "From" : "To")}: {transaction.transferEmail}</p>
               <p>Amount: {transaction.change}</p>
             </div>
           ))}

@@ -11,6 +11,7 @@ const bank_account_query = gql`
           endCursor
         }
         nodes {
+          transferEmail
           accountingTransactionId
           change
           total
