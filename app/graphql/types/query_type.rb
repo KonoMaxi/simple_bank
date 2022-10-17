@@ -10,6 +10,9 @@ module Types
     field :bank_account, Types::BankAccountType, null: false,
       description: "A users Bank account info"
 
+    field :admin_overview, [Types::BankAccountType], null: false,
+      description: "A users Bank account info"
+
     field :transaction_recipients, [Types::UserType], null: false,
       description: "Available users to send money to" do
         argument :search_term, String, validates: { length: { minimum: 3 } }
@@ -20,6 +23,16 @@ module Types
 
     def bank_account
       context[:current_user]
+    end
+
+    def admin_overview
+      # usually I'd use pundit for authorization - but let's not overengineer this
+      if (context[:current_user].id.odd?)
+        # hey wow, apparently you're an admin!
+        User.order(:email)
+      else
+        raise GraphQL::ExecutionError.new("Not Authorized")
+      end
     end
 
     def transaction_recipients(search_term:, limit:)

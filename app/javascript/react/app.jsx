@@ -7,6 +7,7 @@ import {
 import Root from "./routes/root"
 import ListTransactions from "./routes/ListTransactions";
 import NewTransaction from "./routes/NewTransaction";
+import Admin from "./routes/Admin";
 
 import ErrorPage from "./error-page"
 
@@ -29,6 +30,10 @@ export default function App() {
         <Route
           path="/accounting_transactions/new"
           element={<NewTransaction />}
+        />
+        <Route
+          path="/admin"
+          element={<Admin />}
         />
         <Route
           path="*"
