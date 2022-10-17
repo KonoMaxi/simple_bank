@@ -1,34 +1,18 @@
 import React from 'react'
+
 import { Outlet } from "react-router-dom"
 
+import { Greeting } from '../components'
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query'
 
 export default function Root() {
   return (
     <>
-      <div id="sidebar">
-        <h1>React Router Skeleton</h1>
-        {/*<div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
-        </div>*/}
+      <div className="sidebar">
+        <h1>Bankington Bank</h1>
+        <Greeting></Greeting>
       </div>
-      <div id="detail">
+      <div className="detail">
         <Outlet/>
       </div>
     </>

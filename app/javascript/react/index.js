@@ -7,6 +7,7 @@ import {
 import {
   BrowserRouter,
 } from "react-router-dom";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import App from "./app"
 const queryClient = new QueryClient()
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <BrowserRouter>
           <App/>
         </BrowserRouter>
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     )
   }
