@@ -67,10 +67,6 @@ export default function NewTransaction() {
         />
         <p>Hint: Try looking for "kon", "bob" or "alice"</p>
         <div>
-          <label htmlFor="date">Date</label>
-          <input {...register('date', { valueAsDate: true })} defaultValue={ new Date().toISOString() } />
-        </div>
-        <div>
           <label htmlFor="amount">Amount</label>
           <input type="number" step="0.01" {...register('amount', { valueAsNumber: true })} defaultValue="0" />
         </div>

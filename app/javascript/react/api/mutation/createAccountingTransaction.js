@@ -6,17 +6,13 @@ const accounting_transaction_mutation = gql`
   mutation CreateAccountingTransaction(
     $debitAccountId: ID!,
     $amount: Float!,
-    $date: ISO8601DateTime!
   ) {
     createAccountingTransaction(input: {
       accountingTransactionInput: {
         debitAccountId: $debitAccountId
-        date: $date
         amount: $amount
       }
     }) {
-      success
-      errors
       balance {
         total
       }
