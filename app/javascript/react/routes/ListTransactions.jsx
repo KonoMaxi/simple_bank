@@ -29,6 +29,8 @@ export default function ListTransactions() {
 
   if ( status === 'loading' ) {
     return <p>Loading Transactions...</p>
+  } else if ( status === 'error' ) {
+    return <p>We're facing some problems right now. Please try again later...</p>
   }
   return (
     <>
