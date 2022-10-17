@@ -4,8 +4,12 @@ class AccountingTransaction < ApplicationRecord
   has_many :account_balances
 
   validates :date, presence: true
-  validates :amount, presence: true
-  validates :debit_account, comparison: { other_than: :credit_account }
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :debit_account, comparison: {
+    other_than: :credit_account,
+    message: "must not be same as credit account"
+  }
+
 
   after_create :update_account_balances
 

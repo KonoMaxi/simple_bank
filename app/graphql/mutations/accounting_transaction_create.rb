@@ -20,7 +20,7 @@ module Mutations
         acccount_balance = acc_tra.account_balances.find_sole_by(user: context[:current_user])
         { success: true, balance: acccount_balance, errors: [] }
       else
-        { success: false, balance: nil, errors: acc_tra.errors.full_messages }
+        raise GraphQL::ExecutionError.new(acc_tra.errors.full_messages)
       end
     end
   end
