@@ -30,6 +30,12 @@ export default async function createAccountingTransaction (accountingTransaction
       accountingTransactionInput
     )
   } catch (error) {
-    throw error.response.errors.map(x => JSON.parse(x.message)).flat()
+    throw error.response.errors.map(x => {
+      try {
+        return JSON.parse(x.message)
+      } catch {
+        return x.message
+      }
+    }).flat()
   }
 }

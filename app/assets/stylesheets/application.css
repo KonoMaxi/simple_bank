@@ -13,6 +13,7 @@
  *= require_self
  *= require_tree .
  *= require react
+ *= require react-select-search/style
  */
 
 body {

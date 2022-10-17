@@ -12,11 +12,9 @@ const bank_account_query = gql`
   }
 `
 
-export default function useBankAccount () {
-  return useQuery(["bank_account"], async () => {
-    const { bankAccount } = await graphQLClient.request(
-      bank_account_query
-    )
-    return bankAccount
-  })
+export default async function queryBankAccount () {
+  const { bankAccount } = await graphQLClient.request(
+    bank_account_query
+  )
+  return bankAccount
 }

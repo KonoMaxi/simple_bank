@@ -1,22 +1,45 @@
-import React from "react"
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import React, { useState, useEffect } from "react"
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import SelectSearch from 'react-select-search';
 
-import { createAccountingTransaction } from '../api'
+import { createAccountingTransaction, searchTransactionRecipients } from '../api'
 
 export default function NewTransaction() {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, setValue } = useForm()
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+
   const mutation = useMutation(
     (values) => createAccountingTransaction(values),
     {
       onSuccess: ({ createAccountingTransaction }) => {
         queryClient.invalidateQueries(['bank_account'])
+        navigate("/")
       }
     }
   )
+  const recipientOptions = async function (searchterm) {
+    if (!searchterm.length) {
+      return Promise.resolve([])
+    }
+    return new Promise((resolve, reject) => {
+      searchTransactionRecipients(searchterm)
+        .then(recipients => {
+          resolve(recipients.map(({ id, email }) => ({ value: id, name: email })))
+        })
+        .catch(error => {
+          reject()
+        })
+    })
+  }
 
-  const queryClient = useQueryClient()
+  const [ recipientId, setRecipientId] = useState()
+  useEffect(() => {
+    setValue('debitAccountId', recipientId)
+  }, [ recipientId ])
+
   return (
     <>
       <Link to="/">Back</Link>
@@ -32,10 +55,17 @@ export default function NewTransaction() {
             }
           </ul>
         )}
-        <div>
-          <label htmlFor="debit_account_id">Who is the Recipient?</label>
-          <input type="number" {...register('debitAccountId')} />
-        </div>
+        <label htmlFor="debit_account_id">Who is the Recipient?</label>
+        <SelectSearch
+          search
+          options={[]}
+          onChange={(val) => {
+            setRecipientId(val)}
+          }
+          getOptions={recipientOptions}
+          placeholder="Choose a recipient"
+        />
+        <p>Hint: Try looking for "kon", "bob" or "alice"</p>
         <div>
           <label htmlFor="date">Date</label>
           <input {...register('date', { valueAsDate: true })} defaultValue={ new Date().toISOString() } />

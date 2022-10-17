@@ -10,6 +10,6 @@ const graphQLClient = new GraphQLClient(API_URL, {
 })
 
 export default graphQLClient
-export { default as useBankAccount } from './query/useBankAccount';
-export { default as useTransactionRecipients } from './query/useTransactionRecipients.js';
+export { default as queryBankAccount } from './query/queryBankAccount';
+export { default as searchTransactionRecipients } from './query/searchTransactionRecipients.js';
 export { default as createAccountingTransaction } from './mutation/createAccountingTransaction.js';

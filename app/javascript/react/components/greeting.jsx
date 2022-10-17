@@ -1,9 +1,10 @@
 import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import { useBankAccount } from '../api'
+import { queryBankAccount } from '../api'
 
 export default function Greeting() {
-  const { isLoading, error, data } = useBankAccount()
+  const { isLoading, error, data } = useQuery(["bank_account"], queryBankAccount )
 
   if (error) {
     return "Sorry, but we ran into an error. Please try again later"
