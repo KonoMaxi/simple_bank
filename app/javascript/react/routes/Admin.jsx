@@ -26,7 +26,7 @@ export default function Admin() {
       {data.map((account) => (
         <div className={ account.currentBalance >= 0 ? 'card green' : 'card red'} key={account.id}>
           <p>User Email: {account.email}</p>
-          <p>Account Balance: {account.currentBalance}</p>
+          <p>Account Balance: {account.currentBalance || 0}</p>
         </div>
       ))}
     </>

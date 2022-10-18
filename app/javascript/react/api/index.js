@@ -10,7 +10,7 @@ const graphQLClient = new GraphQLClient(API_URL, {
 })
 
 export default graphQLClient
-
+export { csrfToken }
 export { default as queryAdminOverview } from './query/queryAdminOverview.js';
 export { default as queryBankAccount } from './query/queryBankAccount';
 export { default as searchTransactionRecipients } from './query/searchTransactionRecipients.js';
